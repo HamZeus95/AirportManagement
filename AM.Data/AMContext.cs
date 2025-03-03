@@ -27,7 +27,25 @@ namespace AM.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new PlaneConfig());
+            modelBuilder.ApplyConfiguration(new FlightPlaneConfig());
+            // ⬆ or ⬇
+            /* modelBuilder.Entity<Flight>()
+                        .HasMany(f => f.Passengers)
+                        .WithMany(p => p.Flights)
+                        .UsingEntity(jointure => jointure.ToTable("FP"))
+                        .HasOne(f => f.MyPlane)
+                        .WithMany(p => p.Flights)
+                        .HasForeignKey(f => f.PlaneId)
+                        .OnDelete(DeleteBehavior.SetNull);
+            */
         }
+        protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+        {
+            configurationBuilder.Properties<DateTime>()
+                                .HaveColumnType("date");
+        }
+
+
 
     }
 }

@@ -19,10 +19,10 @@ namespace AM.Core.Domain
         public string Comment { get; set; }
 
         [ForeignKey("MyPlane")]
-        public int PlaneId { get; set; }
+        public int? PlaneId { get; set; }
 
         // or :[ForeignKey("PlaneId")]
-        public Plane MyPlane { get; set; }
+        public Plane? MyPlane { get; set; }
         public IList<Passenger> Passengers { get; set; }
 
          public override string ToString()
