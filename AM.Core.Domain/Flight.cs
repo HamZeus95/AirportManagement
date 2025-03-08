@@ -22,12 +22,12 @@ namespace AM.Core.Domain
         public int? PlaneId { get; set; }
 
         // or :[ForeignKey("PlaneId")]
-        public Plane? MyPlane { get; set; }
-        public IList<Passenger> Passengers { get; set; }
+        public virtual Plane? MyPlane { get; set; }
+        public virtual IList<Passenger> Passengers { get; set; }
 
          public override string ToString()
          {
-             return "FlightÎd" + FlightId + "Destination" + Destination + "Departure" + Departure + "FlightDate"+ FlightDate+ "EffectiveArrival"+ EffectiveArrival+ "EstimateDuration" + EstimateDuration + "MyPlane" + MyPlane.ToString() ;
+             return "FlightId : " + FlightId + "Destination :" + Destination + "Departure :" + Departure + "FlightDate :"+ FlightDate+ "EffectiveArrival :"+ EffectiveArrival+ "EstimateDuration :" + EstimateDuration + "MyPlane :" + MyPlane.ToString() ;
          }
         
 

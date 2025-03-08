@@ -123,3 +123,84 @@ AMContext aMContext = new AMContext();
 aMContext.Flights.Add(flight);
 aMContext.SaveChanges();
 
+// test Passenger discriminator
+Passenger passenger5 = new Passenger
+{
+    FirstName = "Hamza",
+    LastName = "Benali",
+    BirthDate = new DateTime(1964, 03, 06),
+    EmailAddress = "hamza.benali@gmail",
+    PassportNumber = "9876543",
+    TelNumber = "123456789",
+
+};
+
+Passenger passenger6 = new Staff
+{
+    FirstName = "Hamza",
+    LastName = "Benali",
+    BirthDate = new DateTime(1964, 03, 06),
+    EmailAddress = "hamza.benali@gmail",
+    PassportNumber = "2345678",
+    TelNumber = "123456789",
+    Salary = 1000,
+    Function = "Pilot",
+    EmployementDate = new DateTime(2022, 11, 15)
+};
+
+Passenger passenger7 = new Traveller
+{
+    FirstName = "Hamza",
+    LastName = "Benali",
+    BirthDate = new DateTime(1964, 03, 06),
+    EmailAddress = "hamza.benali@gmail",
+    PassportNumber = "9654782",
+    TelNumber = "123456789",
+    HealthInformation = "no disease",
+    Nationality = "Tunisian"
+};
+/*
+ * aMContext.Passengers.Add(passenger5);
+aMContext.Passengers.Add(passenger6);
+aMContext.Passengers.Add(passenger7);
+*/
+Reservation reservation = new Reservation
+{
+    Price = 100,
+    Seat= "A1",
+    Vip = true,
+    Passenger = passenger6,
+    Flight = flight
+};
+//aMContext.Reservations.Add(reservation);
+
+/* VI Chargement des données*/
+Plane plane5 = new Plane
+{
+    MyPlaneType = PlaneType.Airbus,
+    Capacity = 150,
+    ManufacturDate = new DateTime(2015, 05, 06)
+};
+
+
+Flight flight2  = new Flight
+{
+    Departure = "Tunis",
+    Destination = "Paris",
+    FlightDate = new DateTime(2025, 05, 06),
+    EstimateDuration = 3,
+    EffectiveArrival = 3,
+    Comment = "A very good flight",
+    MyPlane = plane5
+};
+aMContext.Flights.Add(flight2);
+aMContext.Planes.Add(plane5);
+aMContext.SaveChanges();
+// display flight2 and display the plane of flight2 using the navigation property myPlane
+Console.WriteLine($"Flight: {flight2},\n Plane: {flight2.MyPlane}"+"\n");
+
+// get flight2 from the database
+var flightFromDatabase = aMContext.Flights.Find(flight2.FlightId);
+Console.WriteLine($"Flight from database: {flightFromDatabase},\n Plane: {flightFromDatabase.MyPlane}");
+
+

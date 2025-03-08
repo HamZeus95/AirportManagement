@@ -41,7 +41,7 @@ namespace AM.Core.Domain
 
         public PlaneType  MyPlaneType { get; set; }
 
-        public IList<Flight> Flights { get; set; }
+        public virtual IList<Flight> Flights { get; set; }
 
         /*public override string ToString()
         {
@@ -51,7 +51,7 @@ namespace AM.Core.Domain
 
         public override string ToString()
         {
-            return $"Capacity:{Capacity} " + $"ManufacturDate:{ManufacturDate}" + $"PlaneId:{PlaneId}" + $"MyPlaneType:{MyPlaneType}";
+            return $"Capacity : {Capacity} " + $"ManufacturDate : {ManufacturDate}" + $"PlaneId : {PlaneId}" + $"MyPlaneType : {MyPlaneType}";
         }
 
         // ctor to create default constructor

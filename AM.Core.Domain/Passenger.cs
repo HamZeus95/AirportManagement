@@ -10,6 +10,12 @@ using System.Threading.Tasks;
 
 namespace AM.Core.Domain
 {
+    public enum PassengerType
+    {
+        None = 0,
+        Traveller = 1,
+        Staff = 2
+    }
     public class Passenger
     {
 //        public int PassengerId { get; set; }
@@ -37,7 +43,7 @@ namespace AM.Core.Domain
 
         [Phone(ErrorMessage = "Invalid Phone Number")]
         public string TelNumber { get; set; }
-        public IList<Flight> Flights { get; set; }
+        public virtual IList<Flight> Flights { get; set; }
 
 
        // public int Age { get; set; }

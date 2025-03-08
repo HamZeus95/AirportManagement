@@ -16,18 +16,30 @@ namespace AM.Data
         public DbSet<Plane> Planes { get; set; }
         public DbSet<Traveller> Travellers { get; set; }
         public DbSet<Staff> Staffs { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\mssqllocaldb;
+            optionsBuilder
+                .UseLazyLoadingProxies()
+                .UseSqlServer(@"Data Source=(localdb)\mssqllocaldb;
                                          Initial Catalog = Airport;
                                          Integrated Security = true");
+             
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new PlaneConfig());
             modelBuilder.ApplyConfiguration(new FlightPlaneConfig());
+            modelBuilder.ApplyConfiguration(new PassengerConfig());
+            modelBuilder.ApplyConfiguration(new ReservationConfiguration());
+            /* 
+              ** questions 3&4 de Stratégies d’héritage**
+            modelBuilder.ApplyConfiguration(new TravellerConfig());
+            modelBuilder.ApplyConfiguration(new StaffConfig());
+            */
+
             // ⬆ or ⬇
             /* modelBuilder.Entity<Flight>()
                         .HasMany(f => f.Passengers)
